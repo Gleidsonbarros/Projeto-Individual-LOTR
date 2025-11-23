@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="css/projeto 2.css">
+</head>
+
+<body class="quis">
+  <div>
+    <p class="p1" id="perg1" >Pergunta 1</p>
+    <button id="rep1" class="respostas" onclick="responder(1)">asasdas</button>
+    <button id="rep2" class="respostas" onclick="responder(2)">regdgd</button>
+    <button id="rep3" class="respostas" onclick="responder(3)">wqeqe</button>
+    <button id="rep4" class="respostas" onclick="responder(4)">sagbfd</button>
+
+  </div>
+  
+
+</body>
+
+</html>
+
+<script>
+  var Guerreiro = Number(0);
+  var Mago = Number(0);
+  var Artesao = Number(0);
+  var Sabio = Number(0);
+
+
+  var vt_Guerreiro=["Uma boa espada forjada por um anão — simples, direta e mortal.",
+  "Pego minhas armas e luto sem hesitar. A proteção da família vem antes de tudo.",
+  "Procuro sinais de inimigos ou armadilhas. Segurança primeiro.",
+  "Treinando ou patrulhando. Um guerreiro nunca relaxa completamente.",
+  "Coragem. Sem ela, nenhum herói se levanta.",
+  "Levo apenas o necessário e mantenho minha mente fria. Tesouros não vencem batalhas.",
+  "Uma caneca de cerveja forte de Rohan.",
+  "Não se pode confiar em elfos, prefiro morrer ao depender dos elfos.",
+  "Uma espada longa bem equilibrada."]
+
+  var vt_Mago=["Um cajado repleto de poder antigo.",
+  "Uso minha sabedoria e magia para protegê-los.",
+  "Os segredos arcanos e inscrições antigas nas paredes.",
+  "Lendo grimórios ou estudando magia antiga.",
+  "Sabedoria. Ela guia todas as decisões.",
+  "Estudo o tesouro com cautela — pode esconder magia perigosa.",
+  "Hidromel com ervas élficas, algo leve para clarear a mente.",
+  "Seres antigos e fascinantes, guardiões de grande conhecimento.",
+  "Um cajado encantado."]
+
+  var vt_Artesao=["Um machado bem forjado — útil tanto em batalha quanto no trabalho.",
+  "Construo defesas e proteções para mantê-los seguros.",
+  "Minérios raros e mecanismos antigos.",
+  "Trabalhando na forja ou criando algo novo.",
+  "Criatividade e habilidade com as mãos.",
+  "Analiso o tesouro e penso no que posso criar com ele.",
+  "Cerveja anã, encorpada e tradicional.",
+  "Excelentes com arte e música, embora às vezes complicados demais.",
+  "Um martelo de guerra bem equilibrado."]
+
+  var vt_Sabio=["Nenhuma arma supera a mente, mas se precisar, escolho uma adaga leve.",
+  "Busco conselhos e soluções estratégicas antes de agir.",
+  "O conhecimento perdido — livros, mapas ou inscrições.",
+  "Lendo, estudando ou ensinando.",
+  "Paciência e entendimento.",
+  "Refletiria sobre seu valor histórico antes de tocá-lo.",
+  "Vinho élfico, suave e refinado.",
+  "São seres de grande sabedoria e longevidade — muito a aprender com eles.",
+  "Uma adaga prática ou um pergaminho de feitiços defensivos."]
+
+  var vt_Perguntas=['Em uma batalha, Qual sua arma favorita?','Se sua familia esta em perigo, o que você faz?','Você está explorando uma mina antiga. O que mais lhe interessa?','Como você prefere passar seu tempo livre?','Qual destas qualidades você mais valoriza?','Como você reagiria ao encontrar um enorme tesouro?','Em uma festa, qual seria seria sua bebida favorita?','O que você pensa sobre Elfos','Se você tiver a oportunidade de escolher uma arma, Qual seria?']
+  var indice = 0
+
+function responder(resposta) {
+  if (resposta == 0){
+
+  }
+  else{if (resposta ==1 ) {
+    Guerreiro++
+  }
+  if (resposta==2) {
+    Mago++
+  }
+  if (resposta==3) {
+    Artesao++
+  }
+  if (resposta==4) {
+    Sabio++
+  }}
+
+  
+    document.getElementById("perg1").textContent = vt_Perguntas[indice];
+
+    document.getElementById("rep1").textContent = vt_Guerreiro[indice];
+    document.getElementById("rep2").textContent = vt_Mago[indice];
+    document.getElementById("rep3").textContent = vt_Artesao[indice];
+    document.getElementById("rep4").textContent = vt_Sabio[indice];
+indice++
+
+
+if (indice >vt_Perguntas.length) {
+  window.location  /* vai mandar para a dashboard*/
+}
+}
+
+responder(0)
+
+</script>

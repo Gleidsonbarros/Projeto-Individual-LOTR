@@ -43,11 +43,11 @@ body.boby-cad {
 }
 
 .navbar-cad li a:hover {
-  color: #58c4cd;
+  color: #080a0a;
 }
 
 .agora-cad a {
-  border-bottom: 2px solid #2cece5;
+  border-bottom: 2px solid transparent;
 }
 
 /* Área de login/cadastro */
@@ -69,7 +69,7 @@ body.boby-cad {
 .card-card-cadastro h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #0dd8f3ba;
+  color: #ffffffda;
 }
 
 .formulario .campo {
@@ -81,7 +81,7 @@ body.boby-cad {
 .campo span {
   font-size: 16px;
   margin-bottom: 5px;
-  color: #15c7e6;
+  color: #fcffff;
 }
 
 .campo input {

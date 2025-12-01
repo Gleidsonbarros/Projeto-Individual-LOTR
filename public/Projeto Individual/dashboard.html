@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="css/dashboards.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        
+        <div class="titulo">
+        <header class="header">
+            <h2>Dashboard Dos Anões</h2>
+
+                <h3>
+                    Descubra Qual sua classe entre as mais formidaveis!
+
+                    Nas profundezas das Montanhas da Terra-média,
+                    os Anões são conhecidos por sua coragem, habilidade na forja e lealdade inabalável.
+
+                    Cada Anão possui características únicas que os tornam lendários.
+                    Responda às perguntas e descubra qual classe e torne-se um anão lendario na Terra-média
+                </h3>
+            </header>
+        </div>
+
+        <section class="sessao">
+            <div class="grafico-esquerda">
+                <canvas id="graficoRadar"></canvas>
+            </div>
+
+        </section>
+        
+        
+        <footer class="footer">
+            
+            <div class="grafico-direita">
+                <canvas id="graficoBarra"></canvas>
+            </div>
+
+           
+        </footer>
+
+
+        <div id="div_msg"></div>
+    </div>
+</body>
+<script>
+    var guerreiros = []
+    var magos = []
+    var artesoes = []
+    var sabios = []
+    var arqueiros = []
+    var lanceiros = []
+
+    window.onload =() =>{
+        receber(sessionStorage.ID_USUARIO);
+    };
+
+    function receber(id) {
+
+
+
+        fetch("/dashboard/receber", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: ID_USUARIO
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_USUARIO = json.id;
+
+
+                    for (var i = 0; i < json.length; i++) {
+                        guerreiros.push(json[i].guerreiro)
+                        magos.push(json[i].mago)
+                        artesoes.push(json[i].Artesao)
+                        sabios.push(json[i].sabio)
+                        arqueiros.push(json[i].arqueiro)
+                        lanceiros.push(json[i].lanceiro)
+
+                    }
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        grafico(id)
+    }
+
+
+    montarGraficos();
+
+    // ====== CRIAR GRÁFICOS ======
+    function montarGraficos() {
+
+        // === RADAR (esquerda) ===
+        const ctxRadar = document.getElementById("graficoRadar").getContext("2d");
+
+        new Chart(ctxRadar, {
+            type: "radar",
+            data: {
+                labels: ["Guerreiro", "Mago", "Artesão", "Sábio", "Arqueiro", "Lanceiro"],
+                datasets: [{
+                    label: "Pontuação Média",
+                    data: [
+                        10,
+                        25,
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    backgroundColor: "rgba(138,43,226,0.3)",
+                    borderColor: "blueviolet",
+                    borderWidth: 2
+                }]
+            }
+        });
+
+    }
+
+        plotarGraficos();
+
+    // ====== CRIAR GRÁFICOS ======
+    function plotarGraficos() {
+
+        // === RADAR (direita) ===
+        const ctxBarra = document.getElementById("graficoBarra").getContext("2d");
+
+        new Chart(ctxBarra, {
+            type: "bar",
+            data: {
+                labels: ["Guerreiro", "Mago", "Artesão", "Sábio", "Arqueiro", "Lanceiro"],
+                datasets: [{
+                    label: "Soma Pontuação",
+                    data: [
+                        +10,
+                        +25,
+                        +25,
+                        +25,
+                        +25,
+                        +25
+                    ],
+                    backgroundColor: "rgba(138,43,226,0.3)",
+                    borderColor: "blueviolet",
+                    borderWidth: 2
+                }]
+            }
+        });
+
+    }
+
+</script>
+
+
+</html>

@@ -1,0 +1,59 @@
+*{
+    margin:0;
+    padding:0
+
+}
+#container {
+display: grid;
+gap: 20px;
+grid-template-rows: 1fr 1fr;
+grid-template-columns: 1fr 1fr;
+align-items: center;
+justify-content: center;
+grid-template-areas: 
+    "titulo titulo"
+    "header footer"    ;
+
+}
+.titulo{
+    grid-area: titulo;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    
+
+}
+
+.header{
+    margin-top: 10;
+grid-area: header;
+height: 100px;
+background-color: aqua;
+border: 20px;
+border-radius: 10px;
+align-items: center;
+justify-content: center;
+}
+
+
+.section{
+    justify-self: right;
+height: auto    ;
+background-color: brown;
+}
+
+.footer{
+grid-area: footer;
+
+    height: auto;
+background-color: none;
+
+
+}
+.botao{
+    align-items: center;
+    justify-content: center;
+    right: 100%;
+    border-radius: 14px;
+    
+}

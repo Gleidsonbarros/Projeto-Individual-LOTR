@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Anoes | Home</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="css/cadastro.css" />
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body class="boby-cad" onload="listar()">
+  <!--header inicio-->
+  <div class="header-cad">
+    <div class="container-cad">
+      <h1 class="titulo-cad">Reino dos Anoes</h1>
+      <ul class="navbar-cad">
+        <li>
+          <a href="Home.html">Inicial</a>
+        </li>
+        <li>|</li>
+        <li>
+          <a href="login3.html">Login</a>
+        </li>
+        <li class="agora-cad">
+          <a href="#">Cadastro</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--header fim-->
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro-cad" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card-card-cadastro">
+        <h2>Bem-vindo Ao Reino dos Anões!</h2>
+        <div class="formulario">
+          <!--
+                         Para inserir mais um campo, copie uma das inputs abaixo.
+                         Assim que inserir vá para o script abaixo.
+                     -->
+          <div class="campo">
+            <span>Nome:</span>
+            <input id="nome_input" type="text" placeholder="Seu nome" />
+          </div>
+          <div class="campo">
+            <span>E-mail:</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+          </div>
+          <div class="campo">
+            <span>Senha:</span>
+            <input id="senha_input" type="password" placeholder="******" />
+          </div>
+          <div class="campo">
+            <span>Confirmação da Senha:</span>
+            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+          </div>
+
+        </div>
+        <button class="botao" onclick="cadastrar()">Cadastrar</button>
+      </div>
+      <div id="div_aguardar" class="loading-div">
+        <img src="./assets/circle-loading.gif" id="loading-gif" />
+      </div>
+
+      <div id="div_erros_login"></div>
+    </div>
+  </div>
+  </div>
+
+  <!--footer inicio-->
+  <div class="footer-cad">
+    <div class="container-cad">
+      <h4>Feito com dedicação por &hearts; Gleidson &copy; 2025</h4>
+      <span class="version">v1.0.0</span>
+    </div>
+  </div>
+  <!--footer fim-->
+</body>
+
+</html>
+
+<script>
+  function cadastro() {
+    aguardar();
+
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confSenha = confirmacao_senha_input.value;
+
+
+
+
+    if (emailVar == "" || senhaVar == "" || confSenha != senhaVar) {
+      alert = 'Verifique se os campos estão corretos.'
+      return false;
+    }
+    else {
+      setInterval(sumirMensagem, 5000)
+    }
+
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
+
+    fetch("/login/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeServer: nomeServer,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_USUARIO = json.id;
+
+          
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none"
+  }
+
+</script>
